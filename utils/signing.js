@@ -33,7 +33,14 @@ export async function signStandardL1Action(
 		primaryType: "Agent",
 		message: phantomAgent,
 	};
-	const signedAgent = await wallet.signTypedData(payloadToSign);
+
+	// console.log("Payload to sign:", payloadToSign);
+
+	const signedAgent = await wallet.signTypedData(
+		payloadToSign.domain,
+		payloadToSign.types,
+		payloadToSign.message
+	);
 	return splitSig(signedAgent);
 }
 
